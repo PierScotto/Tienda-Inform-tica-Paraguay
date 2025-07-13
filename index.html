@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tienda Informática Paraguay</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'JetBrains Mono', 'Poppins', monospace, sans-serif;
+      min-height: 100vh;
+      color: #e0eefd;
+      background: radial-gradient(ellipse at 70% 20%, #3a3a60 0%, #181b2a 60%, #0a0a16 100%);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      position: relative;
+      overflow-x: hidden;
+    }
+    /* Estrellas galaxia */
+    .stars {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      top: 0; left: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: transparent;
+    }
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: #fff;
+      opacity: 0.7;
+      animation: twinkle 2s infinite alternate;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+    .snake-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+      overflow: visible;
+    }
+    .snake-path {
+      stroke: #a18fff;
+      stroke-width: 18;
+      fill: none;
+      filter: blur(2px);
+      opacity: 0.10;
+      stroke-dasharray: 1800 1800;
+      stroke-dashoffset: 0;
+      animation: snakeMove 16s linear infinite;
+    }
+    @keyframes snakeMove {
+      0% { stroke-dashoffset: 1800; }
+      100% { stroke-dashoffset: 0; }
+    }
+    .glass {
+      background: linear-gradient(120deg, rgba(24,27,42,0.98) 60%, rgba(127, 83, 255, 0.10) 100%);
+      border: 1.5px solid rgba(127, 83, 255, 0.18);
+      box-shadow: 0 4px 32px 0 rgba(0,0,0,0.25);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      position: relative;
+      z-index: 2;
+    }
+    .copilot-gradient {
+      background: linear-gradient(90deg, #20c2ef 0%, #a18fff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
+    .copilot-btn {
+      background: linear-gradient(90deg, #20c2ef 0%, #a18fff 100%);
+      color: #181b2a;
+      font-weight: bold;
+      transition: filter 0.2s;
+      border: none;
+    }
+    .copilot-btn:hover {
+      filter: brightness(1.15);
+      box-shadow: 0 2px 16px 0 #a18fff55;
+    }
+    a {
+      color: #20c2ef;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: #a18fff;
+    }
+    h1, h2, h3, h4, h5, h6, label, strong {
+      color: #e0eefd;
+    }
+    p, li, span, input, textarea, button {
+      color: #b8c1ec;
+    }
+    .text-gray {
+      color: #b8c1ec;
+    }
+    ::selection {
+      background: #a18fff44;
+    }
+  </style>
+  <script>
+    // Generar estrellas galaxia
+    document.addEventListener("DOMContentLoaded", function() {
+      const stars = document.createElement('div');
+      stars.className = 'stars';
+      for(let i=0; i<90; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.width = `${Math.random()*2+1}px`;
+        star.style.height = star.style.width;
+        star.style.top = `${Math.random()*100}vh`;
+        star.style.left = `${Math.random()*100}vw`;
+        star.style.opacity = Math.random()*0.5+0.5;
+        star.style.animationDelay = `${Math.random()*2}s`;
+        stars.appendChild(star);
+      }
+      document.body.appendChild(stars);
+    });
+  </script>
+</head>
+<body>
+  <!-- SVG serpiente animada fondo -->
+  <svg class="snake-bg" viewBox="0 0 1920 1080" preserveAspectRatio="none">
+    <path class="snake-path"
+      d="M-100,200 
+         Q300,100 600,400 
+         T1200,300 
+         Q1600,500 1920,200
+         Q1700,800 1200,700
+         Q800,600 600,900
+         Q400,1200 0,800"
+    />
+  </svg>
+  <!-- Header -->
+  <header class="bg-[#181b2a]/90 shadow-lg fixed w-full z-50 border-b border-[#a18fff33]">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-2">
+        <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="Logo" class="w-10 h-10">
+        <h1 class="text-2xl font-bold copilot-gradient">Tienda Informática Paraguay</h1>
+      </div>
+      <nav class="flex gap-6 text-[#e0eefd] mt-2 md:mt-0">
+        <a href="#productos" class="hover:text-[#20c2ef]">Productos</a>
+        <a href="#servicios" class="hover:text-[#20c2ef]">Servicios</a>
+        <a href="#contacto" class="hover:text-[#20c2ef]">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="h-[70vh] flex flex-col justify-center items-center text-center relative pt-32">
+    <h2 class="text-5xl md:text-7xl font-extrabold copilot-gradient drop-shadow-xl mb-4">¡Tecnología de Otro Planeta!</h2>
+    <p class="text-2xl md:text-3xl font-light text-gray drop-shadow-lg mb-8 max-w-3xl mx-auto px-4">
+      Tu tienda de informática en Paraguay
+
+<br><br>
+      Productos de calidad, atención personalizada y soporte técnico especializado.
+
+Impulsamos tu rendimiento con innovación y confianza.
+
+    </p>
+    <a href="#productos" class="copilot-btn py-3 px-10 rounded-lg text-lg shadow-lg mt-4">Ver Productos</a>
+  </section>
+
+  <!-- Main Content -->
+  <main class="py-20 px-6">
+    <section class="max-w-7xl mx-auto space-y-20">
+      <!-- Productos destacados arriba -->
+      <div id="productos" class="glass p-8 rounded-2xl shadow-lg">
+        <h2 class="text-3xl font-semibold copilot-gradient mb-8 text-center">Productos Destacados</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          <div class="bg-[#232946]/80 p-4 rounded-lg shadow-md transition border border-[#a18fff55] group cursor-pointer hover:scale-105 hover:border-[#a18fff] relative overflow-hidden">
+            <img src="lenovo.png" alt="Notebook Lenovo"
+              class="w-full h-48 object-cover rounded mb-2 border border-[#a18fff44] group-hover:opacity-70 transition" />
+            <div class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition bg-[#181b2acc]">
+              <p class="text-lg font-bold copilot-gradient mb-2">Notebook Lenovo IdeaPad 1</p>
+              <span class="text-gray text-sm">Intel I5-1334U · 8GB RAM · 512GB SSD</span>
+            </div>
+            <p class="text-center font-medium text-gray">Notebook Lenovo IdeaPad 1</p>
+          </div>
+          <div class="bg-[#232946]/80 p-4 rounded-lg shadow-md transition border border-[#a18fff55] group cursor-pointer hover:scale-105 hover:border-[#a18fff] relative overflow-hidden flex flex-col items-center justify-center">
+            <img src="3060.png" alt="PC Gamer"
+              class="w-full h-48 object-contain rounded mb-2 border border-[#a18fff44] group-hover:opacity-70 transition bg-white" />
+            <div class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition bg-[#181b2acc]">
+              <p class="text-lg font-bold copilot-gradient mb-2">PC Gamer - Gama Media</p>
+              <span class="text-gray text-sm">Ryzen 5 5600· 16GB RAM DDR4 · RTX 3060 12 GB</span>
+            </div>
+            <p class="text-center font-medium text-gray">PC Gamer - Gama Media</p>
+          </div>
+          <div class="bg-[#232946]/80 p-4 rounded-lg shadow-md transition border border-[#a18fff55] group cursor-pointer hover:scale-105 hover:border-[#a18fff] relative overflow-hidden flex flex-col items-center justify-center">
+            <img src="24 sss.jpg" alt="Monitor Samsung"
+              class="w-full h-48 object-contain rounded mb-2 border border-[#a18fff44] group-hover:opacity-70 transition bg-white" />
+            <div class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition bg-[#181b2acc]">
+              <p class="text-lg font-bold copilot-gradient mb-2">Monitor Samsung 24"</p>
+              <span class="text-gray text-sm">Full HD · 75Hz · HDMI</span>
+            </div>
+            <p class="text-center font-medium text-gray">Monitor Samsung 24"</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ¿Quiénes somos? -->
+      <div class="glass p-8 rounded-2xl shadow-lg flex flex-col md:flex-row items-center gap-10">
+        <div class="md:w-1/2 flex justify-center">
+          <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80" alt="Equipo de informática"
+            class="rounded-xl shadow-lg hover:scale-105 transition duration-300 border-2 border-[#a18fff33] w-80 h-56 object-cover" />
+        </div>
+        <div class="md:w-1/2">
+          <h2 class="text-3xl font-bold copilot-gradient mb-4">¿Quiénes somos?</h2>
+          <p class="text-lg leading-relaxed text-gray">
+            Somos <strong class="copilot-gradient">Tienda Informática Paraguay</strong>, especialistas en soluciones tecnológicas para el hogar y empresas. 
+            Ofrecemos productos de última generación, asesoría personalizada y soporte técnico profesional. 
+            Nuestro compromiso es acercarte la mejor tecnología para potenciar tu productividad, entretenimiento y conectividad.
+          </p>
+        </div>
+      </div>
+
+      <!-- Servicios -->
+      <div id="servicios" class="glass p-8 rounded-2xl shadow-lg">
+        <h2 class="text-2xl font-semibold copilot-gradient mb-4">🛠️ Servicios y Productos</h2>
+        <div class="flex flex-col md:flex-row gap-8">
+          <ul class="list-disc pl-6 space-y-2 text-lg text-gray md:w-1/2">
+            <li>💻 Venta y Servicio Técnico de Equipos Informáticos
+
+Ofrecemos una amplia gama de computadoras armadas a medida y notebooks de alto rendimiento, adaptadas a tus necesidades personales o empresariales.</li>
+            <li>🔧 Componentes de última generación:
+Procesadores, memorias RAM, discos SSD/HDD, placas de video y más.</li>
+            <li>🖥️ Accesorios y periféricos:
+Monitores, teclados, mouse, auriculares, parlantes y todo lo que necesitás para completar tu setup.</li>
+            <li>⚙️ Armado personalizado y actualización de PCs:
+Diseñamos y mejoramos tu equipo para garantizar el mejor rendimiento.</li>
+            <li>🛠️ Soporte técnico especializado y garantía asegurada:
+Atención rápida y eficaz para que nunca te detengas.</li>
+          </ul>
+          <div class="md:w-1/2 flex flex-col gap-2">
+            <p class="font-bold text-2xl md:text-3xl copilot-gradient text-center mb-2">💡 Marcas Destacadas:</p>
+            <div class="flex flex-wrap gap-4 mt-2 justify-center items-center">
+              <img src="intel-new-2020-logo-png_seeklogo-392918.png" alt="Intel" class="h-36 w-auto bg-white rounded px-2 py-1 object-contain" />
+              <img src="Amd-logo.jpg" alt="AMD" class="h-36 w-auto bg-white rounded px-2 py-1 object-contain" />
+              <img src="NVIDIA_logo.svg.png" alt="NVIDIA" class="h-24 w-auto bg-white rounded px-2 py-1 object-contain" />
+              <img src="kington.jpg" alt="Kingston" class="h-32 w-auto bg-white rounded px-2 py-1 object-contain" />
+              <img src="logitech-g-logo-png_seeklogo-331100.png" alt="Logitech" class="h-32 w-auto bg-white rounded px-2 py-1 object-contain" />
+              <img src="samsung.jpg" alt="Samsung" class="h-32 w-auto bg-white rounded px-2 py-1 object-contain" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contacto -->
+      <div id="contacto" class="glass p-8 rounded-2xl shadow-lg flex flex-col md:flex-row items-center gap-10">
+        <div class="md:w-1/2 flex flex-col gap-4">
+          <h2 class="text-2xl font-semibold copilot-gradient mb-2">📞 Contacto</h2>
+          <p class="mb-2 flex items-center gap-2">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" class="w-6 h-6">
+            <a href="https://wa.me/595983159658" target="_blank" class="underline text-[#20c2ef] hover:text-[#a18fff]">+595 983 159658</a>
+          </p>
+          <p class="mb-6 flex items-center gap-2">
+            <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email" class="w-6 h-6">
+            <a href="mailto:pierscotto3@gmail.com" class="underline text-[#20c2ef] hover:text-[#a18fff]">pierscotto3@gmail.com</a>
+          </p>
+          <div class="flex gap-4 mt-2">
+            <span class="text-sm text-gray">¡Consultanos por WhatsApp o por el Correo Electrónico para cotizaciones, soporte y asesoría en tecnología!</span>
+          </div>
+        </div>
+        <form action="mailto:pierscotto3@gmail.com" method="POST" enctype="text/plain" class="space-y-4 md:w-1/2 mt-8 md:mt-0">
+          <div>
+            <label class="block mb-1 font-medium copilot-gradient">Nombre y Apellido</label>
+            <input type="text" name="nombre" required class="w-full p-3 rounded-lg bg-[#232946] text-[#e0eefd] border border-[#a18fff44] focus:outline-none focus:ring-2 focus:ring-[#a18fff]" />
+          </div>
+          <div>
+            <label class="block mb-1 font-medium copilot-gradient">Correo Electrónico</label>
+            <input type="email" name="correo" required class="w-full p-3 rounded-lg bg-[#232946] text-[#e0eefd] border border-[#a18fff44] focus:outline-none focus:ring-2 focus:ring-[#a18fff]" />
+          </div>
+          <div>
+            <label class="block mb-1 font-medium copilot-gradient">Número de Contacto</label>
+            <input type="tel" name="telefono" required class="w-full p-3 rounded-lg bg-[#232946] text-[#e0eefd] border border-[#a18fff44] focus:outline-none focus:ring-2 focus:ring-[#a18fff]" />
+          </div>
+          <div>
+            <label class="block mb-1 font-medium copilot-gradient">Mensaje</label>
+            <textarea name="mensaje" rows="4" required class="w-full p-3 rounded-lg bg-[#232946] text-[#e0eefd] border border-[#a18fff44] focus:outline-none focus:ring-2 focus:ring-[#a18fff]"></textarea>
+          </div>
+          <button type="submit" class="copilot-btn py-2 px-6 rounded-lg transition">
+            Enviar Mensaje
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer class="bg-[#181b2a]/90 text-[#b8c1ec] text-center py-4 mt-10 border-t border-[#a18fff33]">
+    <p>&copy; 2025 Tienda Informática Paraguay. Tecnología, innovación y confianza para tu día a día. Derechos Reservados. Piergiorgio Scotto.</p>
+  </footer>
+</body>
+</html>
